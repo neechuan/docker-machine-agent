@@ -5,10 +5,12 @@ ENV MACHINE_AGENT_HOME /opt/machine-agent
 
 WORKDIR ${MACHINE_AGENT_HOME}
 
+#RUN curl -jksSL -o /tmp/machine-agent.zip http://lab-garydockerlab-gzvlnw1g.srv.ravcloud.com/machine-agent.zip
+ADD machine-agent.zip /tmp/
+
 RUN mkdir -p ${MACHINE_AGENT_HOME} && \
     yum install -y unzip && \
     yum install -y iproute && \
-    curl -jksSL -o /tmp/machine-agent.zip http://lab-garydockerlab-gzvlnw1g.srv.ravcloud.com/machine-agent.zip && \
     unzip -oq /tmp/machine-agent.zip -d ${MACHINE_AGENT_HOME} && \
     rm /tmp/machine-agent.zip && \
     chgrp -R 0 ${MACHINE_AGENT_HOME} && \
